@@ -46,6 +46,11 @@ template = {
     "Storages": [],
     "Envs": [],
     "RemoteMountCodePath": "/root/code",
+    "Priority": 4,
+    "Preemptible": 'false',
+    "ActiveDeadlineSeconds": "1h",
+    "DelayExitTimeSeconds": "0h",
+    "AccessType": "Public",
 }
 
 
@@ -85,6 +90,14 @@ def load_vscript(path: Path):
             config_info["Description"] = val
         elif line.startswith("# VBATCH --priority"):
             config_info["Priority"] = val
+        elif line.startswith("# VBATCH --preemptible"):
+            config_info["Preemptible"] = (val.lower() == 'true')
+        elif line.startswith("# VBATCH --activedeadlineseconds"):
+            config_info["ActiveDeadlineSeconds"] = f"{val}"
+        elif line.startswith("# VBATCH --delayexittimeseconds"):
+            config_info["DelayExitTimeSeconds"] = f"{val}"
+        elif line.startswith("# VBATCH --accesstype"):
+            config_info["AccessType"] = f"{val}"
     return script_line, config_info
 
 
@@ -137,6 +150,14 @@ def submit_job(base_bash: Path, priority: int = None):
     if priority_to_use not in [2, 4, 6]:
         raise ValueError("Priority must be 2, 4, or 6 or remain None.")
     template["Priority"] = priority_to_use
+    if 'Preemptible' in config:
+        template["Preemptible"] = config['Preemptible']
+    if 'ActiveDeadlineSeconds' in config:
+        template["ActiveDeadlineSeconds"] = config['ActiveDeadlineSeconds']
+    if 'DelayExitTimeSeconds' in config:
+        template["DelayExitTimeSeconds"] = config['DelayExitTimeSeconds']
+    if 'AccessType' in config:
+        template["AccessType"] = config['AccessType']
 
     log_name = str(Path(base_bash).with_suffix(".log").absolute())
     current_path = str(Path("./").absolute())
