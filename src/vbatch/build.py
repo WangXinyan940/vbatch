@@ -91,7 +91,7 @@ def load_vscript(path: Path):
         elif line.startswith("# VBATCH --priority"):
             config_info["Priority"] = val
         elif line.startswith("# VBATCH --preemptible"):
-            config_info["Preemptible"] = bool(val)
+            config_info["Preemptible"] = (val.lower() == 'true')
         elif line.startswith("# VBATCH --activedeadlineseconds"):
             config_info["ActiveDeadlineSeconds"] = f"{val}"
         elif line.startswith("# VBATCH --delayexittimeseconds"):
@@ -154,9 +154,9 @@ def submit_job(base_bash: Path, priority: int = None):
         template["Preemptible"] = config['Preemptible']
     if 'ActiveDeadlineSeconds' in config:
         template["ActiveDeadlineSeconds"] = config['ActiveDeadlineSeconds']
-    if 'Priority' in config:
+    if 'DelayExitTimeSeconds' in config:
         template["DelayExitTimeSeconds"] = config['DelayExitTimeSeconds']
-    if 'Priority' in config:
+    if 'AccessType' in config:
         template["AccessType"] = config['AccessType']
 
     log_name = str(Path(base_bash).with_suffix(".log").absolute())
