@@ -47,7 +47,7 @@ template = {
     "Envs": [],
     "RemoteMountCodePath": "/root/code",
     "Priority": 4,
-    "Preemptible": 'false',
+    "Preemptible": False,
     "ActiveDeadlineSeconds": "1h",
     "DelayExitTimeSeconds": "0h",
     "AccessType": "Public",
