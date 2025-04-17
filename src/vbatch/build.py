@@ -105,7 +105,7 @@ def build_script(script_lines, path):
     script_inners = "\n".join([line.rstrip() for line in script_lines[1:]])
     return f"""{script_lines[0]}
 
-cd '{path}'
+cd \"{path}\"
 
 {script_inners}
 
@@ -161,7 +161,7 @@ def submit_job(base_bash: Path, priority: int = None):
 
     log_name = str(Path(base_bash).with_suffix(".log").absolute())
     current_path = str(Path("./").absolute())
-    template["Entrypoint"] = f'cd /root/code && bash run.sh >& "{log_name}"'
+    template["Entrypoint"] = f'cd /root/code && bash run.sh >& \"{log_name}\"'
     script_text = build_script(script, current_path)
 
     with TemporaryDirectory() as tempdir:
