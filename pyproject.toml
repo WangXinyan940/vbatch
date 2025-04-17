@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = 'vbatch'
+version = '0.1.0'
+description = ""
+readme = "README.md"
+requires-python = ">= 3.6"
+dependencies = [
+    "pyyaml"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+vbatch = "vbatch.main:main"

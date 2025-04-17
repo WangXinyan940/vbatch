@@ -1,0 +1,16 @@
+TaskName: "test-submit"
+Description: "test submit jobs using sdk"
+ImageUrl: "vemlp-cn-beijing.cr.volces.com/preset-images/python:3.10"
+ResourceQueueID: "your-own-queue"
+Framework: "Custom"
+Priority: 4
+TaskRoleSpecs:
+  - RoleName: "worker"
+    RoleReplicas: 1
+    Flavor: "ml.xni3cl.28xlarge"
+Storages:
+  - Type: "Vepfs"
+    VepfsId: "vepfs-cnbjef566a12f42c"
+    MountPath: "/vepfs"
+    SubPath: "/Your_Path"
+    ReadOnly: false
