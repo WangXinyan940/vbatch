@@ -9,7 +9,10 @@
 # VBATCH --task-name vbatch-submit
 # VBATCH --description tool_test
 # VBATCH --priority 4
-
+# VBATCH --preemptible true
+# VBATCH --activedeadlineseconds 1h
+# VBATCH --delayexittimeseconds 0s
+# VBATCH --accesstype Public
 
 source ~/.bashrc
 source activate
