@@ -48,7 +48,7 @@ template = {
     "RemoteMountCodePath": "/root/code",
     "Priority": 4,
     "Preemptible": False,
-    "ActiveDeadlineSeconds": "1h",
+    "ActiveDeadlineSeconds": "48h",
     "DelayExitTimeSeconds": "0h",
     "AccessType": "Public",
 }
